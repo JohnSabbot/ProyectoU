@@ -3,53 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Electrónica</title>
+    <title>Gestión de Inventario - Tienda de Insumos Computacionales</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <div class="logo">Tienda de Electrónica</div>
+        <div class="logo">Tienda de Insumos Computacionales</div>
         <nav>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#proveedores">Proveedores</a></li>
+                <li><a href="#ventas">Ventas</a></li>
+                <li><a href="#reportes">Reportes</a></li>
+                <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <h1>Bienvenidos a la Tienda de Electrónica</h1>
-            <p>Encuentra los mejores productos electrónicos a los mejores precios.</p>
-            <a href="#" class="btn">Ver Productos</a>
+        <section id="inicio" class="hero">
+            <h1>Bienvenidos a la Gestión de Inventario</h1>
+            <p>Controle y administre sus productos de manera eficiente.</p>
+            <a href="#productos" class="btn">Ver Productos</a>
         </section>
 
-        <section class="products">
-            <h2>Productos Destacados</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="img/product1.jpg" alt="Producto 1">
-                    <h3>Producto 1</h3>
-                    <p>$199.99</p>
+        <section id="productos" class="features">
+            <h2>Gestión de Productos</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Agregar Producto</h3>
+                    <p>Formulario para agregar nuevos productos.</p>
                 </div>
-                <div class="product-card">
-                    <img src="img/product2.jpg" alt="Producto 2">
-                    <h3>Producto 2</h3>
-                    <p>$299.99</p>
+                <div class="feature-item">
+                    <h3>Modificar Producto</h3>
+                    <p>Formulario para modificar productos existentes.</p>
                 </div>
-                <div class="product-card">
-                    <img src="img/product3.jpg" alt="Producto 3">
-                    <h3>Producto 3</h3>
-                    <p>$399.99</p>
+                <div class="feature-item">
+                    <h3>Eliminar Producto</h3>
+                    <p>Opción para eliminar productos del inventario.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="proveedores" class="features">
+            <h2>Gestión de Proveedores</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Agregar Proveedor</h3>
+                    <p>Formulario para agregar nuevos proveedores.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Modificar Proveedor</h3>
+                    <p>Formulario para modificar proveedores existentes.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Eliminar Proveedor</h3>
+                    <p>Opción para eliminar proveedores del sistema.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ventas" class="features">
+            <h2>Gestión de Ventas</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Procesar Ventas</h3>
+                    <p>Formulario para procesar nuevas ventas.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Generar Facturas</h3>
+                    <p>Opción para generar facturas después de cada venta.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="reportes" class="features">
+            <h2>Gestión de Reportes</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Informes de Inventario</h3>
+                    <p>Generar informes detallados del inventario actual.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Análisis de Ventas</h3>
+                    <p>Proporcionar detalles sobre los productos más y menos vendidos.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Tienda de Electrónica. Todos los derechos reservados.</p>
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
     </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
