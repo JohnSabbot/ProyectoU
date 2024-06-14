@@ -3,6 +3,9 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -15,6 +18,7 @@ header {
 header .logo {
     font-size: 1.5em;
     font-weight: bold;
+    margin-bottom: 2em;
 }
 
 nav ul {
@@ -26,7 +30,7 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 1em;
+    margin: 0 2em;
 }
 
 nav ul li a {
@@ -64,6 +68,7 @@ footer {
     color: white;
     text-align: center;
     padding: 1em 0;
+    margin-top: auto;
 }
 
 .login-btn {
@@ -119,4 +124,18 @@ footer {
 
 .login-container button:hover {
     background-color: #ff4b4b;
+}
+
+.registrarse-link {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.registrarse-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.registrarse-link a:hover {
+    text-decoration: underline;
 }
