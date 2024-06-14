@@ -64,6 +64,7 @@ footer {
     color: white;
     text-align: center;
     padding: 1em 0;
+    bottom: 0;
 }
 
 .login-btn {
