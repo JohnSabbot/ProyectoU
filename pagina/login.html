@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenidos a Nuestra Tienda de Insumos Computacionales</title>
+    <title>Login - Tienda de Insumos Computacionales</title>
     <link rel="stylesheet" href="css/Estilo.css">
 </head>
 <body>
@@ -11,19 +11,22 @@
         <div class="logo">Tienda de Insumos Computacionales</div>
         <nav>
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="index.html">Inicio</a></li>
                 <li><a href="login.html" class="login-btn">Login</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="inicio" class="hero">
-        <h1>Bienvenidos a Nuestra Tienda</h1>
-        <p>Encuentra los mejores insumos computacionales al mejor precio.</p>
-        <a href="#productos" class="btn">Ver Productos</a>
-    </section>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form>
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
 
     <footer id="contacto">
         <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
