@@ -72,36 +72,52 @@ footer {
     margin-top: auto;
 }
 
-.foto {
-    height: 120px;
-    width: 120px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    border-radius: 30%;
-    margin-left: 10px;
-    
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-left: 400px;
-}
-
-.title-container {
-    display: flex;
-    align-items: center;
-}
-
 .login-btn {
-    font-weight: bold;
-    color: #ffffff;
-    margin-left: 400px;
-    
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 2em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container label {
+    margin-bottom: 0.5em;
+}
+
+.login-container input {
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login-container button {
+    padding: 0.5em;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #ff4b4b;
 }
