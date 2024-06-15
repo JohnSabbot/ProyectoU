@@ -33,6 +33,10 @@ nav ul li {
     margin: 0 2em;
 }
 
+.titlePage{
+    margin-left: 500px;
+}
+
 nav ul li a {
     color: white;
     text-decoration: none;
@@ -70,21 +74,6 @@ footer {
     text-align: center;
     padding: 1em 0;
     margin-top: auto;
-}
-
-
-.registrarse-link {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.registrarse-link a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.registrarse-link a:hover {
-    text-decoration: underline;
 }
 
 .foto {

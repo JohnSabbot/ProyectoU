@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido!</title>
-    <link rel="stylesheet" href="css/Estilo.css">
+    <title>Login - Tienda de Insumos Computacionales</title>
+    <link rel="stylesheet" href="css/styleRegister.css">
 </head>
 <body>
     <header>
@@ -14,7 +14,6 @@
                 <div class="logo">Tienda de Insumos Computacionales Chile</div>
                 <a href="login.html" class="login-btn">Hola!, Inicia Sesion</a>
             </div>
-            
         </div>
         <nav>
             <ul>
@@ -24,19 +23,27 @@
         </nav>
     </header>
 
-    <section id="inicio" class="hero">
-        <h1>Bienvenidos a Nuestra Tienda Tech-Hogar</h1>
-        <p>Encuentra los mejores insumos computacionales al mejor precio.</p>
-        <br>
-        <a href="producto.html" class="btn">Ver Productos</a>
-    </section>
+    <div class="login-container">
+        <h2>Registrarse</h2>
+        <form>
+            <label for="Nombres">Nombres:</label>
+            <input type="text" id="Nombres" name="Nombres" required>
+            <label for="Apellidos">Apellidos:</label>
+            <input type="text" id="Apellidos" name="Apellidos" required>
+            <label for="Correo">Correo:</label>
+            <input type="correo" id="correo" name="correo" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Entrar</button>
+
+        </form>
+    </div>
 
     <footer id="contacto">
         <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
         <div class="registrarse-link">
             <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
-            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
-            
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>    
         </div>
     </footer>
 </body>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/Estilo.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="img/logoTech.png" class="foto">
+            <div class="logo">Tienda de Insumos Computacionales Chile</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="producto.html">Productos</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <h2>Contactate con un empleado o con la misma empresa! </h2>
+    <div class="login-container">
+
+        <h2>Contactenos</h2>
+        <form id="CBX">
+
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="Correo">Correo:</label>
+            <input type="correo" id="correo" name="correo" required>
+            <label for="Opciones">Motivo:</label>
+            <select id="motivo" name="select">
+                
+                <option value="Seleccione"selected>Seleccione</option>
+                <option value="Devolvolucion">Devolvolucion</option>
+                <option value="Queja">Queja</option>
+                <option value="Garantia">Garantia</option>
+                <option value="Otro Motivo">Otro Motivo</option>
+              
+            </select>
+           
+            <button type="submit">Enviar</button>
+        
+        </form>
+    
+    </div>
+    
+    <script src="Scripts/comboBox.js"></script>
+    <!-- aca esta la referencia al java -->
+
+    
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
+            
+        </div>
+    </footer>
+    
+</body>
+</html>

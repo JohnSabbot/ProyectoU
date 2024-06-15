@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Tienda de Insumos Computacionales</title>
-    <link rel="stylesheet" href="css/Estilo.css">
+    <link rel="stylesheet" href="css/styleLogin.css">
 </head>
 <body>
     <header>
@@ -12,24 +12,33 @@
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
+        <br>
         <form>
             <label for="username">Usuario:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required>
             <button type="submit">Entrar</button>
+            <br>
+            <div class="registrarse-link">
+                <a href="register.html">¿No estas Registrado?</a>
+            </div>
         </form>
     </div>
 
     <footer id="contacto">
         <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
+            
+        </div>
     </footer>
 </body>
 </html>
