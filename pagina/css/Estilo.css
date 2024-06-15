@@ -39,7 +39,6 @@ nav ul li a {
 }
 
 .hero {
-    background: url('img/hero.jpg') no-repeat center center/cover;
     color: white;
     text-align: center;
     padding: 4em 0;
@@ -48,11 +47,13 @@ nav ul li a {
 .hero h1 {
     font-size: 2.5em;
     margin: 0;
+    color: #333;
 }
 
 .hero p {
     font-size: 1.2em;
     margin: 1em 0;
+    color: #333;
 }
 
 .btn {
@@ -72,7 +73,6 @@ footer {
 }
 
 .login-btn {
-    background-color: #ff6b6b;
     color: white;
     padding: 0.5em 1em;
     border-radius: 5px;
@@ -139,3 +139,24 @@ footer {
 .registrarse-link a:hover {
     text-decoration: underline;
 }
+
+.foto {
+    height: 150px;
+    width: 150px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 30%;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 350px;
+}
+
