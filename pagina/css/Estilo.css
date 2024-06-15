@@ -147,6 +147,8 @@ footer {
     display: flex;
     align-items: center;
     border-radius: 30%;
+    margin-left: 10px;
+    
 }
 
 .logo-container {
