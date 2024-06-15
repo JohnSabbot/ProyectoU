@@ -141,8 +141,8 @@ footer {
 }
 
 .foto {
-    height: 150px;
-    width: 150px;
+    height: 110px;
+    width: 125px;
     margin-right: 10px;
     display: flex;
     align-items: center;
