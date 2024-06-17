@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styleAgregarProducto.css">
+    <title>TechHogar</title>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="gestionProductos.html">Volver</a></li>
+        </ul>
+    </nav>
+    <div class="Gestiones">
+        <button onclick="window.location.href='Admin.html'">Volver</button>
+    </div>
+    <h2>Registro de Promos</h2>
+    <form id="formularioAgregarProductos">
+        <div>
+            <label for="nombre">Nombre Producto:</label>
+            <input type="text" id="nombre" name="nombre">
+        </div>
+        <div>
+            <label for="precioUnitario">Precio Unitario:</label>
+            <input type="number" id="precio" name="precio">
+        </div>
+        <div>
+            <label for="stock">Stock</label>
+            <input type="number" id="stock" name="stock">
+        </div>
+<!--este de categoria es el que digo que no deberia ser parte de la tabla productos y no su propia tabla ya que esa tabla pos solo tiene un dato-->
+        <div>
+            <label for="IDCategoria">IDCategoria</label>
+            <input type="number" id="IDCategoria" name="IDCategoria">
+        </div>
+
+        <input type="submit" value="Enviar">
+    </form>
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
+            
+        </div>
+    </footer>
+
+</body>
+</html>
