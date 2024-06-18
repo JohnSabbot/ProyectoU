@@ -25,10 +25,18 @@
     <div class="titlePage">
         <h2>Productos Tecnologicos</h2>
     </div>
+
+    <style>
+         select {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
     
     <div class="container">
         <h1>Categorias</h1>
-        <select id="Productos">
+        <select id="Productos" onchange="cargarProductos()">
             <option value="">Selecciona una Categoria</option>
             <option value="notebooks">Notebooks</option>
             <option value="auriculares">Auriculares</option>
