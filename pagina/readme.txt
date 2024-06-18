@@ -1,6 +1,6 @@
 comandos para contectarse a la base de datos:
 
-npm int -y
+npm init -y
 
 npm install mysql express -y
 
