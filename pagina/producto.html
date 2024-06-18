@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenidos a Nuestra Tienda de Insumos Computacionales</title>
     <link rel="stylesheet" href="css/styleProductos.css">
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -26,13 +28,6 @@
         <h2>Productos Tecnologicos</h2>
     </div>
 
-    <style>
-         select {
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-    </style>
     
     <div class="container">
         <h1>Categorias</h1>
@@ -42,7 +37,32 @@
             <option value="auriculares">Auriculares</option>
         </select>
     </div>
-    
+
+    <!--aca falta ponerle una imagen, puede que no muestre los datos bien ya que no se muy bien como funciona ya que el jotape fue quien lo programo en la pagina, hay que agregar un producto para que muestre o sino no va a aparecer en la pagina-->
+    <script>
+        window.onload = function () {
+            fetch('/catalogo')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var promosList = document.getElementById('promos-list');
+                    data.forEach(function (promos) {
+                        var card = document.createElement('div');
+                        card.classList.add('card');
+                        card.style.width = '18rem';
+                        card.innerHTML = '<img src="img/imgHamburger.png" + " class="card-img-top" alt="' + productos.nombreProducto + '">' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title">' + productos.nombreProducto + '</h5>' +
+                            '<p><strong>stock:</strong> $' + productos.stock + '</p>' +
+                            '<p><strong>Precio:</strong> $' + productos.precioUnitario + '</p>' +
+                            '</div>';
+                        promosList.appendChild(card);
+                    });
+                });
+        };
+    </script>
+
 <footer id="contacto">
     <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
     <div class="registrarse-link">
@@ -52,4 +72,5 @@
     </div>
 </footer>
 </body>
+
 </html>
