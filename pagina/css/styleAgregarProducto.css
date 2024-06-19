@@ -105,18 +105,18 @@ footer {
 
 .Gestiones {
     text-align: left;
-    margin: 20px;
+    margin: 5px;
 }
 .Gestiones button {
     background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 13px 27px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 10px 20px;
+    margin: 1px 2px;
     cursor: pointer;
     border-radius: 8px;
     transition: background-color 0.3s ease;
@@ -130,11 +130,11 @@ h2 {
 
 }
 form {
-    max-width: 400px;
-    margin: 20px auto;
+    max-width: 290px;
+    margin: 2px auto;
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 15px;
+    border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 form div {
@@ -167,4 +167,10 @@ input[type="submit"] {
 }
 input[type="submit"]:hover {
     background-color: #45a049;
+}
+.Logout-btn {
+    font-weight: bold;
+    color: #ffffff;
+    margin-left: 400px;
+    
 }
