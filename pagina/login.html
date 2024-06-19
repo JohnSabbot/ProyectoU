@@ -5,41 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Tienda de Insumos Computacionales</title>
     <link rel="stylesheet" href="css/styleLogin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <div class="logo">Tienda de Insumos Computacionales</div>
-        <nav>
-            <ul>
+        <div class="logo-container">
+            <img src="img/logoTech.png" class="foto">
+            <div class="title-container">
+                <div class="logo">Tienda de Insumos Computacionales Chile</div>
+            </div>
+            <div class="indexI">
                 <li><a href="index.html">Inicio</a></li>
-            </ul>
-        </nav>
+            </div>
     </header>
 
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
-        <br>
-        <form id="login">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Entrar</button>
-            <br>
+        <form class="formulario-login" action="/login_logion" method="post" id="login">
+            <div class="loginLogin">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="loginLogin">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar</button>
             <div class="registrarse-link">
-                <a href="register.html">¿No estas Registrado?</a>
+                <a href="register.html">¿No estás registrado?</a>
             </div>
         </form>
-        <script src="js/login.js"></script>
     </div>
 
     <footer id="contacto">
         <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
         <div class="registrarse-link">
-            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
-            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
-            
+            <h5>Consulte acá: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, no nos pagan por ayudarle ;|</h6>
         </div>
     </footer>
+    <script src="js/login.js"></script>
 </body>
 </html>
