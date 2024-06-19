@@ -29,6 +29,73 @@
     <div class="titlePage">
         <h2>Gestion Productos</h2>
     </div>
+
+
+    <button class="btn btn-success" onclick="window.location.href = '/agregarProducto.html'">Agregar Producto</button>
+
+    <div class="card-container" id="productos-list"></div>
+
+    <script>
+        let cartCount = 0;
+        window.onload = function () {
+            fetch('/catalogo')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                var productsList = document.getElementById('productos-list');
+                data.forEach(function(prod) {
+                    var card = document.createElement('div');
+                    card.classList.add('card');
+                    card.style.width = '18rem';
+                    card.innerHTML = '<img src="img/imgHamburger.png" class="card-img-top" alt="' + producto.nombreProducto + '">' +
+                                     '<div class="card-body">' +
+                                     '<h5 class="card-title">' + producto.nombreProducto + '</h5>' +
+                                     '<p><strong>Stock:</strong> ' + producto.stock + '</p>' +
+                                     '<p><strong>Precio:</strong> $' + producto.precioUnitario + '</p>' +
+                                     '<button class="btn btn-success" onclick="modificarProducto()">Modificar Producto</button>' +
+                                     '<button class="btn btn-danger" onclick="eliminarProducto(' + prod.id + ')">Eliminar Producto</button>' +
+                                     '</div>';
+                    productsList.appendChild(card);
+                });
+            });
+        };
+         function agregarAlCarrito() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+    </script>
+
+<script>
+    function eliminarProducto(id) {
+        fetch('/eliminar_producto/' + id, {
+            method: 'DELETE'
+        })
+        .then(function(response) {
+            if (response.ok) {
+                console.log('Producto eliminado correctamente.');
+                window.location.reload();
+            } else {
+                console.error('Error al eliminar producto.');
+            }
+        })
+        .catch(function(error) {
+            console.error('Error en la solicitud:', error);
+        });
+    }
+
+</script>
+
+<script>
+    function modificarProducto(id) {
+        window.location.href = '/modificarProducto.html?id=' + id;
+    }
+</script>
+
+
+
+
+
     
 <footer id="contacto">
     <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>

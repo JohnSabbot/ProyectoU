@@ -39,8 +39,9 @@ nav ul li {
     margin: 0 2em;
 }
 
-.titlePage{
-    margin-left: 650px;
+.titlePage {
+    margin-left: 300px;
+    padding-top: 30px;
 }
 
 nav ul li a {
@@ -90,7 +91,6 @@ footer {
     align-items: center;
     border-radius: 30%;
     margin-left: 10px;
-    
 }
 
 .logo-container {
@@ -113,6 +113,58 @@ footer {
     font-weight: bold;
     color: #ffffff;
     margin-left: 400px;
-    
+}
+
+.container-Cat {
+    margin-left: 30px;
+}
+
+.product-count {
+    font-size: 14px;
+    color: gray;
+    margin: 0;
+}
+
+h2 {
+    color: rgb(0, 0, 0);
+}
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+form div {
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    font-weight: bold;
+}
+input[type="text"],
+input[type="date"],
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+input[type="submit"]:hover {
+    background-color: #45a049;
 }
 

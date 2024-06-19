@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Bienvenidos a Nuestra Tienda de Insumos Computacionales</title>
     <link rel="stylesheet" href="css/styleProductos.css">
 </head>
@@ -25,52 +26,98 @@
         </nav>
     </header>
     <div class="titlePage">
-        <h2>Productos Tecnologicos</h2>
+        <p id="product-count" class="product-count"></p>
+        <h2>Productos</h2>
     </div>
-
     
-    <div class="container">
-        <h1>Categorias</h1>
+    <div class="container-Cat">
+        <h4>Categorias</h4>
         <select id="Productos" onchange="cargarProductos()">
             <option value="">Selecciona una Categoria</option>
             <option value="notebooks">Notebooks</option>
             <option value="auriculares">Auriculares</option>
+            <option value="mouse">Mouse</option>
+            <option value="monitores">Monitores</option>
+            <option value="mousepads">MousePads</option>
         </select>
     </div>
+    
+    <div id="promos-list" class="product-list"></div>
 
-    <!--aca falta ponerle una imagen, puede que no muestre los datos bien ya que no se muy bien como funciona ya que el jotape fue quien lo programo en la pagina, hay que agregar un producto para que muestre o sino no va a aparecer en la pagina-->
+    <script src="products.js"></script>
+
+
+    <div class="card-container" id="productos-list"></div>
+
     <script>
+        let cartCount = 0;
         window.onload = function () {
             fetch('/catalogo')
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    var promosList = document.getElementById('promos-list');
-                    data.forEach(function (promos) {
-                        var card = document.createElement('div');
-                        card.classList.add('card');
-                        card.style.width = '18rem';
-                        card.innerHTML = '<img src="img/imgHamburger.png" + " class="card-img-top" alt="' + productos.nombreProducto + '">' +
-                            '<div class="card-body">' +
-                            '<h5 class="card-title">' + productos.nombreProducto + '</h5>' +
-                            '<p><strong>stock:</strong> $' + productos.stock + '</p>' +
-                            '<p><strong>Precio:</strong> $' + productos.precioUnitario + '</p>' +
-                            '</div>';
-                        promosList.appendChild(card);
-                    });
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                var productsList = document.getElementById('productos-list');
+                data.forEach(function(prod) {
+                    var card = document.createElement('div');
+                    card.classList.add('card');
+                    card.style.width = '18rem';
+                    card.innerHTML = '<img src="img/imgHamburger.png" class="card-img-top" alt="' + producto.nombreProducto + '">' +
+                                     '<div class="card-body">' +
+                                     '<h5 class="card-title">' + producto.nombreProducto + '</h5>' +
+                                     '<p><strong>Stock:</strong> ' + producto.stock + '</p>' +
+                                     '<p><strong>Precio:</strong> $' + producto.precioUnitario + '</p>' +
+                                     '<button class="btn btn-success" onclick="agregarAlCarrito()">Agregar al Carrito</button>' +
+                                     '<button class="btn btn-danger" onclick="quitarDelCarrito()">Quitar del Carrito</button>' +
+                                     '</div>';
+                    productsList.appendChild(card);
                 });
+            });
         };
+         function agregarAlCarrito() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        function quitarDelCarrito() {
+            cartCount--;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
     </script>
 
-<footer id="contacto">
-    <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
-    <div class="registrarse-link">
-        <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
-        <h6>Recuerde, nos pagan por ayudarle ;|</h6>
-        
-    </div>
-</footer>
+<script>
+    function eliminarProducto(id) {
+        fetch('/eliminar_producto/' + id, {
+            method: 'DELETE'
+        })
+        .then(function(response) {
+            if (response.ok) {
+                console.log('Producto eliminado correctamente.');
+                window.location.reload();
+            } else {
+                console.error('Error al eliminar producto.');
+            }
+        })
+        .catch(function(error) {
+            console.error('Error en la solicitud:', error);
+        });
+    }
+
+</script>
+
+<script>
+    function modificarProducto(id) {
+        window.location.href = '/modificarProducto.html?id=' + id;
+    }
+</script>
+    
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
+        </div>
+    </footer>
 </body>
 
 </html>

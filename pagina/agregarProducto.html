@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styleAgregarProducto.css">
     <title>TechHogar</title>
 </head>
@@ -16,8 +17,8 @@
     <div class="Gestiones">
         <button onclick="window.location.href='Admin.html'">Volver</button>
     </div>
-    <h2>Registro de Promos</h2>
-    <form id="formularioAgregarProductos">
+    <h2>Registro de Productos</h2>
+    <form id="formularioAgregarProductos" action="/guardar_producto" method="post" onSubmit="return valida();">
         <div>
             <label for="nombre">Nombre Producto:</label>
             <input type="text" id="nombre" name="nombre">
@@ -34,7 +35,6 @@
             <label for="IDCategoria">IDCategoria</label>
             <input type="number" id="IDCategoria" name="IDCategoria">
         </div>
-
         <input type="submit" value="Enviar">
     </form>
     <footer id="contacto">
@@ -42,9 +42,7 @@
         <div class="registrarse-link">
             <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
             <h6>Recuerde, nos pagan por ayudarle ;|</h6>
-            
         </div>
     </footer>
-
 </body>
 </html>
