@@ -1,36 +1,39 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
 header {
-    background-color: #242571;
+    width: 100%;
+    background-color: #007BFF;
     color: white;
-    padding: 1em 0;
+    padding: 10px 0;
     text-align: center;
 }
 
 header .logo {
-    font-size: 1.5em;
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 2em;
 }
 
-nav ul {
+header nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: center;
 }
 
-nav ul li {
+header nav ul li {
     display: inline;
-    margin: 0 2em;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
 }
 
 .titlePage{
@@ -69,11 +72,25 @@ nav ul li a {
 }
 
 footer {
-    background-color: #242571;
-    color: white;
+    width: 100%;
+    background-color: #f8f8f8;
     text-align: center;
-    padding: 1em 0;
+    padding: 20px 0;
     margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer .registrarse-link h5, footer .registrarse-link h6 {
+    margin: 5px 0;
+}
+
+footer .registrarse-link a {
+    color: #007BFF;
+    text-decoration: none;
 }
 
 .foto {
