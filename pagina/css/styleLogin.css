@@ -45,6 +45,7 @@ header nav ul li a {
     width: 300px;
     text-align: center;
     margin: 50px auto;
+    align-items: center;
 }
 
 .login-container h2 {
@@ -63,11 +64,11 @@ header nav ul li a {
 }
 
 .loginLogin input {
-    width: calc(100% - 20px);
+    width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .login-container button {
