@@ -62,11 +62,11 @@
                     var card = document.createElement('div');
                     card.classList.add('card');
                     card.style.width = '18rem';
-                    card.innerHTML = '<img src="img/imgHamburger.png" class="card-img-top" alt="' + producto.nombreProducto + '">' +
+                    card.innerHTML = 
                                      '<div class="card-body">' +
-                                     '<h5 class="card-title">' + producto.nombreProducto + '</h5>' +
-                                     '<p><strong>Stock:</strong> ' + producto.stock + '</p>' +
-                                     '<p><strong>Precio:</strong> $' + producto.precioUnitario + '</p>' +
+                                     '<h5 class="card-title">' + prod.nombreProducto + '</h5>' +
+                                     '<p><strong>Stock:</strong> ' + prod.stock + '</p>' +
+                                     '<p><strong>Precio:</strong> $' + prod.precioUnitario + '</p>' +
                                      '<button class="btn btn-success" onclick="agregarAlCarrito()">Agregar al Carrito</button>' +
                                      '<button class="btn btn-danger" onclick="quitarDelCarrito()">Quitar del Carrito</button>' +
                                      '</div>';
@@ -105,11 +105,6 @@
 
 </script>
 
-<script>
-    function modificarProducto(id) {
-        window.location.href = '/modificarProducto.html?id=' + id;
-    }
-</script>
     
     <footer id="contacto">
         <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenidos a Nuestra Tienda de Insumos Computacionales</title>
-    <link rel="stylesheet" href="css/styleAdmin.css">
+    <link rel="stylesheet" href="css/styleGestionProductos.css">
 </head>
 <body>
     <header>
@@ -48,11 +48,11 @@
                     var card = document.createElement('div');
                     card.classList.add('card');
                     card.style.width = '18rem';
-                    card.innerHTML = '<img src="img/imgHamburger.png" class="card-img-top" alt="' + producto.nombreProducto + '">' +
+                    card.innerHTML = 
                                      '<div class="card-body">' +
-                                     '<h5 class="card-title">' + producto.nombreProducto + '</h5>' +
-                                     '<p><strong>Stock:</strong> ' + producto.stock + '</p>' +
-                                     '<p><strong>Precio:</strong> $' + producto.precioUnitario + '</p>' +
+                                     '<h5 class="card-title">' + prod.nombreProducto + '</h5>' +
+                                     '<p><strong>Stock:</strong> ' + prod.stock + '</p>' +
+                                     '<p><strong>Precio:</strong> $' + prod.precioUnitario + '</p>' +
                                      '<button class="btn btn-success" onclick="modificarProducto()">Modificar Producto</button>' +
                                      '<button class="btn btn-danger" onclick="eliminarProducto(' + prod.id + ')">Eliminar Producto</button>' +
                                      '</div>';
@@ -60,10 +60,6 @@
                 });
             });
         };
-         function agregarAlCarrito() {
-            cartCount++;
-            document.getElementById('cart-count').innerText = cartCount;
-        }
     </script>
 
 <script>
