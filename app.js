@@ -62,7 +62,7 @@ app.post('/modificar_producto', (req, res) => {
             return;
         }
         console.log('Producto modificado correctamente.');
-        res.redirect('/pagAdmin.html');
+        res.redirect('/pagAdmin.html'); //modificar esta madre
     });
 });
 
