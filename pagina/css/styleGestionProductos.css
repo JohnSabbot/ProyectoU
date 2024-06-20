@@ -36,9 +36,29 @@ header nav ul li a {
     text-decoration: none;
 }
 
-.titlePage{
-    margin-left: 500px;
+.titlePage {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
 }
+
+
+.btnAgregar {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 13px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
 
 nav ul li a {
     color: white;
@@ -180,9 +200,67 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-.btn-success{
-    margin-left: 30px;
-    margin-top: -90px;
+.actions-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Adjusted Button Success Styles */
+.btn-success {
+    margin-left: 0;
+    margin-top: 0;
+    width: auto;
+}
+
+/* Card Container Styles */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Card Styles */
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 10px 0;
+}
+
+.card button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card .btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.card .btn-danger {
+    background-color: #dc3545;
+    color: white;
 }
 .Logout-btn {
     font-weight: bold;
