@@ -24,13 +24,39 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'pagina')));
 
-app.post('/guardar_producto',(req, res) => {
-    const { nombreProducto, precioUnitario, stock } = req.body;
-    const sql = 'INSERT INTO productos (nombreProducto, precioUnitario, stock) VALUES (?, ?, ?)';
-    connection.query(sql, [nombreProducto, precioUnitario, stock], (err, result) => {
-        if (err) throw err;
+app.get('/categorias', (req, res) => {
+    connection.query('SELECT * FROM categorias', (error, results) => {
+        if (error) {
+            console.error('Error al obtener categorías: ' + error.message);
+            res.status(500).send('Error en el servidor al obtener categorías');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+app.get('/proveedores', (req, res) => {
+    connection.query('SELECT * FROM proveedores', (error, results) => {
+        if (error) {
+            console.error('Error al obtener proveedores: ' + error.message);
+            res.status(500).send('Error en el servidor al obtener proveedores');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+app.post('/guardar_producto', (req, res) => {
+    const { nombre, precio, stock, proveedor, categoria } = req.body;
+    const query = 'INSERT INTO productos (nombreProducto, precioUnitario, stock, IdProveedor, IdCategoria) VALUES (?, ?, ?, ?, ?)';
+    connection.query(query, [nombre, precio, stock, proveedor, categoria], (error, results) => {
+        if (error) {
+            console.error('Error al insertar producto: ' + error.message);
+            res.status(500).send('Error en el servidor al guardar el producto');
+            return;
+        }
         console.log('Producto insertado correctamente.');
-        res.redirect('/');
+        res.redirect('/agregarProducto.html');
     });
 });
 
