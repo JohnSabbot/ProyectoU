@@ -186,3 +186,51 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 10px 0;
+}
+
+.card button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card .btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.card .btn-danger {
+    background-color: #dc3545;
+    color: white;
+}

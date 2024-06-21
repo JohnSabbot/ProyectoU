@@ -158,7 +158,7 @@ footer .registrarse-link a {
     max-height: 100vh;
     width: auto;
     height: auto;
-    object-fit: contain;
+    object-fit: fill;
 }
 
 .carousel-control {
