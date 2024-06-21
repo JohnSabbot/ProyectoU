@@ -1,0 +1,270 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.titlePage {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+
+.btnAgregar {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 13px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    color: white;
+    text-align: center;
+    padding: 4em 0;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin: 0;
+    color: #333;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin: 1em 0;
+    color: #333;
+}
+
+.btn {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+footer {
+    width: 100%;
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer .registrarse-link h5, footer .registrarse-link h6 {
+    margin: 5px 0;
+}
+
+footer .registrarse-link a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.foto {
+    height: 120px;
+    width: 120px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 30%;
+    margin-left: 10px;
+    
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 400px;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.Gestiones {
+    text-align: left;
+    margin: 5px;
+}
+.Gestiones button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 13px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+.Gestiones button:hover {
+    background-color: #45a049;
+}
+
+.btn-agregar9{
+    color: #4CAF50;
+}
+
+form div {
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    font-weight: bold;
+}
+input[type="text"],
+input[type="date"],
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.actions-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Adjusted Button Success Styles */
+.btn-success {
+    margin-left: 0;
+    margin-top: 0;
+    width: auto;
+}
+
+/* Card Container Styles */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Card Styles */
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 10px 0;
+}
+
+.card button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card .btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.card .btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+.Logout-btn {
+    font-weight: bold;
+    color: #ffffff;
+    margin-left: 400px;
+    
+}
