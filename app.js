@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'SoftwareProductos'
+    database: 'softwareproductos'
 });
 
 connection.connect((err) => {
@@ -22,7 +22,7 @@ connection.connect((err) => {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'pagina')));
+app.use(express.static(path.join(__dirname, 'pagina'))); 
 
 app.post('/guardar_producto',(req, res) => {
     const { nombreProducto, precioUnitario, stock } = req.body;
@@ -83,6 +83,63 @@ app.get('/catalogo/:id', (req, res) => {
 });
 
 
+
+app.get('/proveedores', (req, res) => {
+    const query = 'SELECT * FROM proveedores';
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error al obtener proveedores:', error);
+            res.status(500).send('Error al obtener proveedores.');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+
+
+app.post('/agregar_proveedor', (req, res) => {
+    const { nombre_proveedor, correoElectronico } = req.body;
+    const query = 'INSERT INTO proveedores (nombre_proveedor, correoElectronico) VALUES (?, ?)';
+    connection.query(query, [nombre_proveedor, correoElectronico], (error, results) => {
+        if (error) {
+            console.error('Error al agregar proveedor:', error);
+            res.status(500).send('Error al agregar proveedor.');
+        } else {
+            res.status(201).send('Proveedor agregado.');
+        }
+    });
+});
+
+app.delete('/eliminar_proveedor/:id', (req, res) => {
+    const id = req.params.id;
+    const query = 'DELETE FROM proveedores WHERE IdProveedor = ?';
+    connection.query(query, [id], (error, results) => {
+        if (error) {
+            console.error('Error al eliminar proveedor:', error);
+            res.status(500).send('Error al eliminar proveedor.');
+        } else {
+            res.send('Proveedor eliminado.');
+        }
+    });
+});
+
+app.put('/modificar_proveedor/:id', (req, res) => {
+    const { nombre_proveedor, correoElectronico } = req.body;
+    const proveedorId = req.params.id;
+
+    const sql = 'UPDATE proveedores SET nombre_proveedor = ?, correoElectronico = ? WHERE IdProveedor = ?';
+
+    connection.query(sql, [nombre_proveedor, correoElectronico, proveedorId], (err, result) => {
+        if (err) {
+            console.error('Error al modificar el proveedor:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+        console.log('Proveedor modificado correctamente.');
+        res.status(200).send('Proveedor modificado correctamente');
+    });
+});
 app.listen(port, () => {
     console.log('Servidor corriendo en http://localhost:3000');
 });

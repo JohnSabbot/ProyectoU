@@ -26,9 +26,9 @@
 
     
     <div class="Gestiones">
-        <button onclick="window.location.href='Admin.html'">Volver</button>
+        <button onclick="window.location.href='gestionProveedor.html'">Volver</button>
     </div>
-    <h2>Registro de Promos</h2>
+    <h2>Registro de Proveedores</h2>
     <form id="formularioAgregarProveedor">
         <div>
             <label for="nombre">Nombre Proveedor:</label>
@@ -41,6 +41,31 @@
 
         <input type="submit" value="Enviar">
     </form>
+    <script>
+        document.getElementById('formularioAgregarProveedor').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var nombre = document.getElementById('nombre').value;
+            var correo = document.getElementById('correo').value;
+
+            fetch('/agregar_proveedor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre_proveedor: nombre, correoElectronico: correo })
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    window.location.href = '/gestionProveedor.html';
+                } else {
+                    console.error('Error al agregar proveedor.');
+                }
+            })
+            .catch(function(error) {
+                console.error('Error en la solicitud:', error);
+            });
+        });
+    </script>
     <footer id="contacto">
         <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
         <div class="registrarse-link">

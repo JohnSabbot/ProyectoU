@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Proveedor</title>
+    <link rel="stylesheet" href="css/styleAdmin.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="img/logoTech.png" class="foto">
+            <div class="title-container">
+                <div class="logo">Tienda de Insumos Computacionales Chile</div>
+                <a href="index.html" class="Logout-btn">Cerrar Sesion? :( </a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="InicioAdmin.html">Inicio</a></li>
+                <li><a href="Admin.html">Administracion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="Gestiones">
+        <button onclick="window.location.href='gestionProveedor.html'">Volver</button>
+    </div>
+    <h2>Modificar Proveedor</h2>
+    <form id="formularioModificarProveedor">
+        <div>
+            <label for="nombre">Nombre Proveedor:</label>
+            <input type="text" id="nombre" name="nombre">
+        </div>
+        <div>
+            <label for="correo">Correo Proveedor:</label>
+            <input type="text" id="correo" name="correo">
+        </div>
+        <input type="hidden" id="proveedorId" name="proveedorId">
+        <input type="submit" value="Guardar Cambios">
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const proveedorId = urlParams.get('id');
+
+          
+            const proveedorIdInput = document.getElementById('proveedor-id');
+            const nombreInput = document.getElementById('nombre');
+            const correoInput = document.getElementById('correo');
+
+         
+            fetch(`/proveedores/${proveedorId}`)
+                .then(response => response.json())
+                .then(proveedor => {
+                    proveedorIdInput.value = proveedor.IdProveedor;
+                    nombreInput.value = proveedor.nombre_proveedor;
+                    correoInput.value = proveedor.correoElectronico;
+                })
+                .catch(error => console.error('Error al obtener datos del proveedor:', error));
+
+            modificarForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const proveedorId = proveedorIdInput.value;
+                const nombre = nombreInput.value;
+                const correo = correoInput.value;
+
+                fetch(`/modificar_proveedor/${proveedorId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre_proveedor: nombre, correoElectronico: correo })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/gestionProveedor.html';
+                    } else {
+                        console.error('Error al modificar el proveedor.');
+                    }
+                })
+                .catch(error => console.error('Error en la solicitud:', error));
+            });
+        });
+    </script>
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aquí: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, estamos aquí para ayudarle ;)</h6>
+        </div>
+    </footer>
+</body>
+</html>

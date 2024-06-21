@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenidos a Nuestra Tienda de Insumos Computacionales</title>
     <link rel="stylesheet" href="css/styleAdmin.css">
+    <link rel="stylesheet" href="css/listaProveedores.css">
+
 </head>
 <body>
     <header>
@@ -30,6 +32,75 @@
         <h2>Gestion Proveedores</h2>
     </div>
     
+    <button class="btn btn-success" onclick="window.location.href = '/agregarProveedor.html'">Agregar Proveedor</button>
+
+    <div class="card-container" id="productos-list"></div>
+
+   
+    <table>
+        <thead>
+            <tr>
+                <th>Proveedor</th>
+                <th>Correo Electrónico</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="proveedores-list"></tbody>
+    </table>
+
+    <script>
+        
+        window.onload = function () {
+            
+            fetch('/proveedores')
+            .then(function(response) {
+                return response.json();
+            })
+            
+            .then(function(data) {
+                var proveedoresList = document.getElementById('proveedores-list');
+                data.forEach(function(proveedor) {
+                    var row = document.createElement('tr');
+                    row.innerHTML = '<td>' + proveedor.nombre_proveedor + '</td>' +
+                                    '<td>' + proveedor.correoElectronico + '</td>' +
+                                    '<td>' +
+                                        '<button class="btn btn-success" onclick="modificarProveedor(' + proveedor.IdProveedor + ')">Modificar</button>' +
+                                       '<button class="btn btn-danger" onclick="confirmarEliminarProveedor(' + proveedor.IdProveedor + ')">Eliminar</button>'
+
+                                    '</td>';
+                    proveedoresList.appendChild(row);
+                });
+            })
+            .catch(function(error) {
+                console.error('Error al cargar los proveedores:', error);
+            });
+        };
+        function confirmarEliminarProveedor(id) {
+        if (confirm('¿Estás seguro de eliminar este proveedor?')) {
+            eliminarProveedor(id);
+        }
+    }
+        function eliminarProveedor(id) {
+        fetch(`/eliminar_proveedor/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Proveedor eliminado correctamente.');
+                window.location.reload();
+            } else {
+                console.error('Error al eliminar proveedor.');
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
+    }
+        function modificarProveedor(id) {
+            window.location.href = '/modificarProveedor.html?id=' + id;
+        }
+    </script>
+
 <footer id="contacto">
     <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
     <div class="registrarse-link">
