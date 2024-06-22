@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
+const multer = require('multer');
 
 const app = express();
 const port = 3000;
