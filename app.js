@@ -6,6 +6,10 @@ const multer = require('multer');
 const app = express();
 const port = 3000;
 
+
+const upload = multer({dest: 'pagina/img/'});
+
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -20,6 +24,35 @@ connection.connect((err) => {
     }
     console.log('Conexión exitosa a la base de datos.');
 });
+
+
+
+app.use(express.urlencoded({extended: true}));
+
+app.use('/img', express.static(path.join(__dirname, 'img')));
+
+app.post('/subir_imagenes', upload.single('imagen'), (req, res) =>{
+    const {nombre, descripcion} = req.body;
+    const imagen = req.file.filename;
+    const sql = 'INSERT INTO imagenes (nombre, descripcion, imagen) VALUES (?, ?, ?)';
+    connection.query(sql, [nombre, descripcion, imagen], (err) =>{
+        if(err) throw err;
+        res.redirect('/');
+    });
+});
+
+app.get('/img', (req, res) =>{
+    const sql = 'SELECT nombre, descripcion, imagen FROM imagenes';
+    connection.query(sql, (err, result) =>{
+        if(err){
+            console.error('Error al obtener los datos de la BD');
+            return;
+        }
+        res.json(result);
+    });
+});
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
