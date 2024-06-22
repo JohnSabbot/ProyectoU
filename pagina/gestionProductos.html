@@ -62,7 +62,7 @@
 
     <script>
         window.onload = function(){
-            fetch('/img')
+            fetch('/imagenes')
             .then(response => response.json())
             .then(data =>{
                 const imagenesDiv = document.getElementById('imagenesSubidas');
@@ -71,7 +71,7 @@
                     imgDiv.innerHTML =
                         '<h3>' + imagen.nombre + '</h3>' +
                         '<p>' + imagen.descripcion + '</p>'+
-                        '<img src="/img/' + imagen.imagen + '" alt="' + imagen.nombre + '" width="200">';
+                        '<img src="/imagenes/' + imagen.imagen + '" alt="' + imagen.nombre + '" width="200">';
                     imagenesDiv.appendChild(imgDiv);
                 });
             });

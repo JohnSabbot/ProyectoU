@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 
-const upload = multer({dest: 'pagina/img/'});
+const upload = multer({dest: 'imagenes/'});
 
 
 const connection = mysql.createConnection({
@@ -29,7 +29,7 @@ connection.connect((err) => {
 
 app.use(express.urlencoded({extended: true}));
 
-app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/imagenes', express.static(path.join(__dirname, 'imagenes')));
 
 app.post('/subir_imagenes', upload.single('imagen'), (req, res) =>{
     const {nombre, descripcion} = req.body;
@@ -41,7 +41,7 @@ app.post('/subir_imagenes', upload.single('imagen'), (req, res) =>{
     });
 });
 
-app.get('/img', (req, res) =>{
+app.get('/imagenes', (req, res) =>{
     const sql = 'SELECT nombre, descripcion, imagen FROM imagenes';
     connection.query(sql, (err, result) =>{
         if(err){
