@@ -150,45 +150,33 @@ app.delete('/eliminar_producto/:id', (req, res) => {
 });
 
 app.get('/producto/:id', (req, res) => {
-    const { id } = req.params;
-    const sql = 'SELECT * FROM productos WHERE IdProducto = ?';
-    connection.query(sql, [id], (error, results) => {
-        if (error) {
-            console.error('Error al obtener producto: ' + error.message);
-            res.status(500).send('Error en el servidor al obtener el producto');
+    const id = req.params.id;
+    connection.query('SELECT * FROM productos WHERE IdProducto = ?', [id], (err, result) => {
+        if (err) {
+            console.error('Error al obtener los datos del producto:', err);
+            res.status(500).send('Error interno del servidor');
             return;
         }
-        if (results.length > 0) {
-            res.json(results[0]);
-        } else {
+        if (result.length === 0) {
             res.status(404).send('Producto no encontrado');
+            return;
         }
+        res.json(result[0]);
     });
 });
 
 
-app.post('/modificar_producto', upload.single('imagen'), (req, res) => {
-    const { id_producto, nombre, precio, stock, proveedor, categoria } = req.body;
-    let sql;
-    let values;
-
-    if (req.file) {
-        const imagen = req.file.filename;
-        sql = 'UPDATE productos SET nombreProducto = ?, precioUnitario = ?, stock = ?, imagen = ?, IdProveedor = ?, IdCategoria = ? WHERE IdProducto = ?';
-        values = [nombre, precio, stock, imagen, proveedor, categoria, id_producto];
-    } else {
-        sql = 'UPDATE productos SET nombreProducto = ?, precioUnitario = ?, stock = ?, IdProveedor = ?, IdCategoria = ? WHERE IdProducto = ?';
-        values = [nombre, precio, stock, proveedor, categoria, id_producto];
-    }
-
-    connection.query(sql, values, (error) => {
-        if (error) {
-            console.error('Error al modificar producto: ' + error.message);
-            res.status(500).send('Error en el servidor al modificar el producto');
+app.post('/modificar_producto', (req, res) => {
+    const { idHide, nombreProducto, precioUnitario, stock, imagen, IdProveedor, IdCategoria } = req.body;
+    const sql = 'UPDATE productos SET nombreProducto = ?, precioUnitario = ?, stock = ?, imagen = ?, IdProveedor = ?, IdCategoria = ? WHERE IdProducto = ?';
+    connection.query(sql, [nombreProducto, precioUnitario, stock, imagen, IdProveedor, IdCategoria, idHide], (err, result) => {
+        if (err) {
+            console.error('Error al modificar el producto:', err);
+            res.status(500).send('Error interno del servidor');
             return;
         }
         console.log('Producto modificado correctamente.');
-        res.redirect('/modificarProducto.html');
+        res.redirect('/gestionProductos.html');
     });
 });
 
