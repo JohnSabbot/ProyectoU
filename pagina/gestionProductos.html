@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/styleGestionProductos.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -38,72 +40,100 @@
         <button class="btnAgregar" onclick="window.location.href = '/agregarProducto.html'">Agregar Producto</button>
     </div>
 
-    
+
     <div class="card-container" id="productos-list"></div>
-    
+
     <script>
         let cartCount = 0;
         window.onload = function () {
             fetch('/catalogo')
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-                var productsList = document.getElementById('productos-list');
-                data.forEach(function(prod) {
-                    var card = document.createElement('div');
-                    card.classList.add('card');
-                    card.style.width = '18rem';
-                    card.innerHTML = 
-                                     '<img src="/imagenes/' + prod.imagen + '" class="card-img-top" alt=">' +
-                                     '<div class="card-body">' +
-                                     '<h5 class="card-title">' + prod.nombreProducto + '</h5>' +
-                                     '<p><strong>Stock:</strong> ' + prod.stock + '</p>' +
-                                     '<p><strong>Precio:</strong> $' + prod.precioUnitario + '</p>' +
-                                     '<button class="btn btn-success" onclick="modificarProducto(' + prod.IdProducto + ')">Modificar Producto</button>' +
-                                     '<button class="btn btn-danger" onclick="confirmarEliminarProducto(' + prod.IdProducto + ')">Eliminar Producto</button>' +
-                                     '</div>';
-                    productsList.appendChild(card);
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var productsList = document.getElementById('productos-list');
+                    data.forEach(function (prod) {
+                        var card = document.createElement('div');
+                        card.classList.add('card');
+                        card.style.width = '18rem';
+                        card.innerHTML =
+                            '<img src="/imagenes/' + prod.imagen + '" class="card-img-top" alt=">' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title">' + prod.nombreProducto + '</h5>' +
+                            '<p><strong>Stock:</strong> ' + prod.stock + '</p>' +
+                            '<p><strong>Precio:</strong> $' + prod.precioUnitario + '</p>' +
+                            '<button class="btn btn-success" onclick="modificarProducto(' + prod.IdProducto + ')">Modificar Producto</button>' +
+                            '<button class="btn btn-danger" onclick="confirmarEliminarProducto(' + prod.IdProducto + ')">Eliminar Producto</button>' +
+                            '</div>';
+                        productsList.appendChild(card);
+                    });
+                })
+                .catch(function (error) {
+                    console.error('Error al cargar los productos:', error);
                 });
-            })
-            .catch(function(error) {
-                console.error('Error al cargar los productos:', error);
-            });
         };
         function confirmarEliminarProducto(id) {
-        if (confirm('¿Estás seguro de eliminar este producto?')) {
-            eliminarProducto(id);
-        }
-    }
+            // Cambia para abrir la modal de Bootstrap
+            var modal = new bootstrap.Modal(document.getElementById('eliminarModal'));
+            modal.show();
 
-    function eliminarProducto(id) {
-        fetch(`/eliminar_producto/${id}`, {
-            method: 'DELETE'
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Producto eliminado correctamente.');
-                window.location.reload();
-            } else {
-                console.error('Error al eliminar producto.');
-            }
-        })
-        .catch(error => {
-            console.error('Error en la solicitud:', error);
-        });
-    }
-    function modificarProducto(id) {
-        window.location.href = '/modificarProducto.html?id=' + id;
-    }
+            // Asigna el evento click al botón de confirmación dentro de la modal
+            var confirmarBtn = document.getElementById('confirmarEliminarBtn');
+            confirmarBtn.addEventListener('click', function () {
+                eliminarProducto(id);
+            });
+        }
+
+        function eliminarProducto(id) {
+            fetch(`/eliminar_producto/${id}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Producto eliminado correctamente.');
+                        window.location.reload();
+                    } else {
+                        console.error('Error al eliminar producto.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                });
+        }
+        function modificarProducto(id) {
+            window.location.href = '/modificarProducto.html?id=' + id;
+        }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<footer id="contacto">
-    <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
-    <div class="registrarse-link">
-        <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
-        <h6>Recuerde, nos pagan por ayudarle ;|</h6>
-        
+    <!-- Modal para confirmar eliminación -->
+    <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="eliminarModalLabel">Confirmar Eliminación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarEliminarBtn">Eliminar</button>
+                </div>
+            </div>
+        </div>
     </div>
-</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
+
+        </div>
+    </footer>
 </body>
+
 </html>
