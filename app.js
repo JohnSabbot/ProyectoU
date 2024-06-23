@@ -40,6 +40,45 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'pagina'))); 
 
+
+app.post('/registrar_usuario', (req, res) =>{
+    const {nombre_usuario, apellido_usuario, direccion, correoElectronico, contraseña, rol} = req.body;
+    const sql = 'INSERT INTO usuarios (nombre_usuario, apellido_usuario, direccion, correoElectronico, contraseña, rol) VALUES (?, ?, ?, ?, ?, ?)';
+    connection.query(sql,[nombre_usuario, apellido_usuario, direccion, correoElectronico, contraseña, rol], (err, result) =>{
+        if(err){
+            console.error('Error al registrar usuario', err);
+        }else{
+            console.log('El usuario se registro correctamente');
+            res.redirect('/login.html');
+        }
+    });
+});
+
+
+app.post('/iniciar_sesion', (req, res) =>{
+    const {correoElectronico, contraseña} = req.body;
+    const sql = 'SELECT rol FROM usuarios WHERE correoElectronico = ? AND contraseña = ?';
+    connection.query(sql,[correoElectronico, contraseña], (err, result) =>{
+        if(err){
+            console.error('Error al iniciar sesion', err);
+        }else if(result.length > 0){
+            const rol = result[0].rol;
+            if(rol === 1){
+                res.redirect('/Admin.html');
+            }else if(rol === 2){
+                res.redirect('/producto.html');
+            }
+        }
+        else{
+            res.send('Correo o contraseña incorrectos');
+        }
+    });
+
+
+
+});
+
+
 app.get('/categorias', (req, res) => {
     connection.query('SELECT * FROM categorias', (error, results) => {
         if (error) {
@@ -94,11 +133,14 @@ app.get('/catalogo', (req, res) => {
 
 app.delete('/eliminar_producto/:id', (req, res) => {
     const id = req.params.id;
-    const sql = 'DELETE FROM productos WHERE id = ?';
-    connection.query(sql, [id], (err, result) => {
-        if (err) throw err;
-        console.log('Producto eliminado correctamente.');
-        res.sendStatus(200); 
+    const query = 'DELETE FROM productos WHERE IdProducto = ?';
+    connection.query(query, [id], (error, results) => {
+        if (error) {
+            console.error('Error al eliminar producto:', error);
+            res.status(500).send('Error al eliminar producto.');
+        } else {
+            res.send('Producto eliminado correctamente.');
+        }
     });
 });
 
@@ -173,6 +215,16 @@ app.delete('/eliminar_proveedor/:id', (req, res) => {
         }
     });
 });
+
+/*app.delete('/eliminar_producto/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = 'DELETE FROM productos WHERE IdProducto = ?';
+    connection.query(sql, [id], (err, result) => {
+        if (err) throw err;
+        console.log('Producto eliminado correctamente.');
+        res.sendStatus(200); 
+    });
+});*/
 
 app.put('/modificar_proveedor/:id', (req, res) => {
     const { nombre_proveedor, correoElectronico } = req.body;
