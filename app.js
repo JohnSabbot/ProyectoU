@@ -124,8 +124,13 @@ app.post('/guardar_producto', upload.single('imagen'), (req, res) => {
 
 
 app.get('/catalogo', (req, res) => {
-    connection.query('SELECT * FROM productos', (error, results) => {
-        if (error) throw error;
+    const sql = 'SELECT * FROM productos';
+    connection.query(sql, (error, results) => {
+        if (error) {
+            console.error('Error al obtener productos: ' + error.message);
+            res.status(500).send('Error en el servidor al obtener los productos');
+            return;
+        }
         res.json(results);
     });
 });
@@ -144,19 +149,49 @@ app.delete('/eliminar_producto/:id', (req, res) => {
     });
 });
 
-app.post('/modificar_producto', (req, res) => {
-    const { IdProducto, nombreProducto, precioUnitario, stock, IdCategoria } = req.body;
-    const sql = 'UPDATE productos SET nombreProducto = ?, precioUnitario = ?, stock = ?, IdCategoria = ? WHERE IdProducto = ?';
-    connection.query(sql, [nombreProducto, precioUnitario, stock, IdCategoria, IdProducto], (err, result) => {
-        if (err) {
-            console.error('Error al modificar el producto:', err);
-            res.status(500).send('Error interno del servidor');
+app.get('/producto/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = 'SELECT * FROM productos WHERE IdProducto = ?';
+    connection.query(sql, [id], (error, results) => {
+        if (error) {
+            console.error('Error al obtener producto: ' + error.message);
+            res.status(500).send('Error en el servidor al obtener el producto');
+            return;
+        }
+        if (results.length > 0) {
+            res.json(results[0]);
+        } else {
+            res.status(404).send('Producto no encontrado');
+        }
+    });
+});
+
+
+app.post('/modificar_producto', upload.single('imagen'), (req, res) => {
+    const { id_producto, nombre, precio, stock, proveedor, categoria } = req.body;
+    let sql;
+    let values;
+
+    if (req.file) {
+        const imagen = req.file.filename;
+        sql = 'UPDATE productos SET nombreProducto = ?, precioUnitario = ?, stock = ?, imagen = ?, IdProveedor = ?, IdCategoria = ? WHERE IdProducto = ?';
+        values = [nombre, precio, stock, imagen, proveedor, categoria, id_producto];
+    } else {
+        sql = 'UPDATE productos SET nombreProducto = ?, precioUnitario = ?, stock = ?, IdProveedor = ?, IdCategoria = ? WHERE IdProducto = ?';
+        values = [nombre, precio, stock, proveedor, categoria, id_producto];
+    }
+
+    connection.query(sql, values, (error) => {
+        if (error) {
+            console.error('Error al modificar producto: ' + error.message);
+            res.status(500).send('Error en el servidor al modificar el producto');
             return;
         }
         console.log('Producto modificado correctamente.');
-        res.redirect('/pagAdmin.html'); //modificar esta madre
+        res.redirect('/modificarProducto.html');
     });
 });
+
 
 app.get('/catalogo/:id', (req, res) => {
     const id = req.params.id;

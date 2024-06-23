@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Producto</title>
+</head>
+<body>
+    <h2>Modificar Producto</h2>
+    <form id="form-modificar-producto" action="/modificar_producto" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="id_producto" name="id_producto" required>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br><br>
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required>
+        <br><br>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required>
+        <br><br>
+        <label for="proveedor">Proveedor:</label>
+        <input type="text" id="proveedor" name="proveedor" required>
+        <br><br>
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" name="categoria" required>
+        <br><br>
+        <label for="imagen">Imagen:</label>
+        <input type="file" id="imagen" name="imagen">
+        <br><br>
+        <input type="submit" value="Modificar Producto">
+    </form>
+
+    <script>
+        function cargarProductos() {
+            fetch('/catalogo')
+            .then(response => response.json())
+            .then(data => {
+                const productsList = document.getElementById('productos-list');
+                productsList.innerHTML = '';
+                data.forEach(prod => {
+                    const productItem = document.createElement('div');
+                    productItem.innerHTML = `
+                        <h3>${prod.nombreProducto}</h3>
+                        <p>Precio: $${prod.precioUnitario}</p>
+                        <p>Stock: ${prod.stock}</p>
+                        <button onclick="modificarProducto(${prod.IdProducto})">Modificar</button>
+                    `;
+                    productsList.appendChild(productItem);
+                });
+            })
+            .catch(error => console.error('Error al cargar los productos:', error));
+        }
+
+        
+        function modificarProducto(id) {
+            fetch(`/producto/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('id_producto').value = data.IdProducto;
+                document.getElementById('nombre').value = data.nombreProducto;
+                document.getElementById('precio').value = data.precioUnitario;
+                document.getElementById('stock').value = data.stock;
+                document.getElementById('proveedor').value = data.IdProveedor;
+                document.getElementById('categoria').value = data.IdCategoria;
+            })
+            .catch(error => console.error('Error al cargar el producto:', error));
+        }
+        window.onload = cargarProductos(id);
+    </script>
+</body>
+</html>
