@@ -30,7 +30,7 @@
         <button onclick="window.location.href='Admin.html'">Volver</button>
     </div>
     <h2>Registro de Productos</h2>
-    <form id="formularioAgregarProductos" action="/guardar_producto" method="post" onSubmit="return valida();">
+    <form id="formularioAgregarProductos" action="/guardar_producto" method="post" enctype="multipart/form-data" onSubmit="return valida();">
         <div>
             <label for="nombre">Nombre Producto:</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -50,6 +50,10 @@
         <div>
             <label for="categoria">Categorías</label>
             <select id="categoria" name="categoria" required></select>
+        </div>
+        <div>
+            <label for="imagen">Selecciona la Foto:</label>
+            <input type="file" id="imagen" name="imagen" required>
         </div>
         <input type="submit" value="Enviar">
     </form>

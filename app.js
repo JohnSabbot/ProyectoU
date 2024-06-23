@@ -31,26 +31,8 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/imagenes', express.static(path.join(__dirname, 'imagenes')));
 
-app.post('/subir_imagenes', upload.single('imagen'), (req, res) =>{
-    const {nombre, descripcion} = req.body;
-    const imagen = req.file.filename;
-    const sql = 'INSERT INTO imagenes (nombre, descripcion, imagen) VALUES (?, ?, ?)';
-    connection.query(sql, [nombre, descripcion, imagen], (err) =>{
-        if(err) throw err;
-        res.redirect('/');
-    });
-});
 
-app.get('/imagenes', (req, res) =>{
-    const sql = 'SELECT nombre, descripcion, imagen FROM imagenes';
-    connection.query(sql, (err, result) =>{
-        if(err){
-            console.error('Error al obtener los datos de la BD');
-            return;
-        }
-        res.json(result);
-    });
-});
+
 
 
 
@@ -80,10 +62,17 @@ app.get('/proveedores', (req, res) => {
     });
 });
 
-app.post('/guardar_producto', (req, res) => {
+app.post('/guardar_producto', upload.single('imagen'), (req, res) => {
     const { nombre, precio, stock, proveedor, categoria } = req.body;
-    const query = 'INSERT INTO productos (nombreProducto, precioUnitario, stock, IdProveedor, IdCategoria) VALUES (?, ?, ?, ?, ?)';
-    connection.query(query, [nombre, precio, stock, proveedor, categoria], (error, results) => {
+
+    if (!req.file) {
+        return res.status(400).send('No se ha subido ninguna imagen.');
+    }
+
+    const imagen = req.file.filename;
+    const sql = 'INSERT INTO productos (nombreProducto, precioUnitario, stock, imagen, IdProveedor, IdCategoria) VALUES (?, ?, ?, ?, ?, ?)';
+    
+    connection.query(sql, [nombre, precio, stock, imagen, proveedor, categoria], (error) => {
         if (error) {
             console.error('Error al insertar producto: ' + error.message);
             res.status(500).send('Error en el servidor al guardar el producto');
@@ -93,6 +82,7 @@ app.post('/guardar_producto', (req, res) => {
         res.redirect('/agregarProducto.html');
     });
 });
+
 
 app.get('/catalogo', (req, res) => {
     connection.query('SELECT * FROM productos', (error, results) => {
