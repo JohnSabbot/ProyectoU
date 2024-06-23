@@ -60,7 +60,7 @@
                                      '<h5 class="card-title">' + prod.nombreProducto + '</h5>' +
                                      '<p><strong>Stock:</strong> ' + prod.stock + '</p>' +
                                      '<p><strong>Precio:</strong> $' + prod.precioUnitario + '</p>' +
-                                     '<button class="btn btn-success" onclick="modificarProducto()">Modificar Producto</button>' +
+                                     '<button class="btn btn-success" onclick="modificarProducto(' + prod.IdProducto + ')">Modificar Producto</button>' +
                                      '<button class="btn btn-danger" onclick="confirmarEliminarProducto(' + prod.IdProducto + ')">Eliminar Producto</button>' +
                                      '</div>';
                     productsList.appendChild(card);

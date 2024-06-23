@@ -24,15 +24,13 @@
         </div>
         <div>
             <label for="imagen">Imagen:</label>
-            <input type="text" id="imagen" name="imagen" required>
+            <input type="file" id="imagen" name="imagen" required>
         </div>
         <div>
-            <label for="IdProveedor">Proveedor:</label>
-            <input type="text" id="IdProveedor" name="IdProveedor" required>
+            <input type="hidden" id="IdProveedor" name="IdProveedor" required>
         </div>
         <div>
-            <label for="IdCategoria">Categoría:</label>
-            <input type="text" id="IdCategoria" name="IdCategoria" required>
+            <input type="hidden" id="IdCategoria" name="IdCategoria" required>
         </div>
         <button type="submit">Guardar Cambios</button>
     </form>
@@ -47,7 +45,6 @@
             const nombreInput = document.getElementById('nombreProducto');
             const precioInput = document.getElementById('precioUnitario');
             const stockInput = document.getElementById('stock');
-            const imagenInput = document.getElementById('imagen');
             const proveedorInput = document.getElementById('IdProveedor');
             const categoriaInput = document.getElementById('IdCategoria');
 
@@ -58,7 +55,6 @@
                     nombreInput.value = producto.nombreProducto;
                     precioInput.value = producto.precioUnitario;
                     stockInput.value = producto.stock;
-                    imagenInput.value = producto.imagen;
                     proveedorInput.value = producto.IdProveedor;
                     categoriaInput.value = producto.IdCategoria;
                 })

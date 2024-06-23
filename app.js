@@ -166,8 +166,12 @@ app.get('/producto/:id', (req, res) => {
 });
 
 
-app.post('/modificar_producto', (req, res) => {
-    const { idHide, nombreProducto, precioUnitario, stock, imagen, IdProveedor, IdCategoria } = req.body;
+app.post('/modificar_producto', upload.single('imagen'), (req, res) => {
+    const { idHide, nombreProducto, precioUnitario, stock, IdProveedor, IdCategoria } = req.body;
+    if (!req.file) {
+        return res.status(400).send('No se ha subido ninguna imagen.');
+    }
+    const imagen = req.file.filename;
     const sql = 'UPDATE productos SET nombreProducto = ?, precioUnitario = ?, stock = ?, imagen = ?, IdProveedor = ?, IdCategoria = ? WHERE IdProducto = ?';
     connection.query(sql, [nombreProducto, precioUnitario, stock, imagen, IdProveedor, IdCategoria, idHide], (err, result) => {
         if (err) {
