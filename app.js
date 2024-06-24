@@ -217,6 +217,8 @@ app.get('/proveedores', (req, res) => {
 
 
 
+
+
 app.post('/agregar_proveedor', (req, res) => {
     const { nombre_proveedor, correoElectronico } = req.body;
     const query = 'INSERT INTO proveedores (nombre_proveedor, correoElectronico) VALUES (?, ?)';
@@ -243,30 +245,34 @@ app.delete('/eliminar_proveedor/:id', (req, res) => {
     });
 });
 
-/*app.delete('/eliminar_producto/:id', (req, res) => {
+app.get('/proveedores/:id', (req, res) => {
     const id = req.params.id;
-    const sql = 'DELETE FROM productos WHERE IdProducto = ?';
-    connection.query(sql, [id], (err, result) => {
-        if (err) throw err;
-        console.log('Producto eliminado correctamente.');
-        res.sendStatus(200); 
+    connection.query('SELECT * FROM proveedores WHERE IdProveedor = ?', [id], (err, result) => {
+        if (err) {
+            console.error('Error al obtener los datos del producto:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+        if (result.length === 0) {
+            res.status(404).send('Producto no encontrado');
+            return;
+        }
+        res.json(result[0]);
     });
-});*/
+});
 
-app.put('/modificar_proveedor/:id', (req, res) => {
-    const { nombre_proveedor, correoElectronico } = req.body;
-    const proveedorId = req.params.id;
-
+app.post('/modificar_proveedor', (req, res) => {
+    const { idHide, nombre_proveedor, correoElectronico } = req.body;
     const sql = 'UPDATE proveedores SET nombre_proveedor = ?, correoElectronico = ? WHERE IdProveedor = ?';
 
-    connection.query(sql, [nombre_proveedor, correoElectronico, proveedorId], (err, result) => {
+    connection.query(sql, [nombre_proveedor, correoElectronico, idHide], (err, result) => {
         if (err) {
             console.error('Error al modificar el proveedor:', err);
             res.status(500).send('Error interno del servidor');
             return;
         }
         console.log('Proveedor modificado correctamente.');
-        res.status(200).send('Proveedor modificado correctamente');
+        res.redirect('/gestionProveedor.html');
     });
 });
 app.listen(port, () => {
