@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenidos a Nuestra Tienda de Insumos Computacionales</title>
     <link rel="stylesheet" href="css/styleAdmin.css">
     <link rel="stylesheet" href="css/listaProveedores.css">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body>
     <header>
@@ -33,12 +34,12 @@
     <div class="titlePage">
         <h2>Gestion Proveedores</h2>
     </div>
-    
+
     <button class="btn btn-success" onclick="window.location.href = '/agregarProveedor.html'">Agregar Proveedor</button>
 
     <div class="card-container" id="productos-list"></div>
 
-   
+
     <table>
         <thead>
             <tr>
@@ -49,67 +50,113 @@
         </thead>
         <tbody id="proveedores-list"></tbody>
     </table>
+    <div class="modal fade" id="detalleProveedorModal" tabindex="-1" role="dialog" aria-labelledby="detalleProveedorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleProveedorModalLabel">Detalles del Proveedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Nombre:</strong> <span id="detalleNombreProveedor"></span></p>
+                    <p><strong>Correo Electrónico:</strong> <span id="detalleCorreoElectronico"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        
-        window.onload = function () {
-            
-            fetch('/proveedores')
-            .then(function(response) {
-                return response.json();
-            })
-            
-            .then(function(data) {
-                var proveedoresList = document.getElementById('proveedores-list');
-                data.forEach(function(proveedor) {
-                    var row = document.createElement('tr');
-                    row.innerHTML = '<td>' + proveedor.nombre_proveedor + '</td>' +
-                                    '<td>' + proveedor.correoElectronico + '</td>' +
-                                    '<td>' +
-                                        '<button class="btn btn-success" onclick="modificarProveedor(' + proveedor.IdProveedor + ')">Modificar</button>' +
-                                       '<button class="btn btn-danger" onclick="confirmarEliminarProveedor(' + proveedor.IdProveedor + ')">Eliminar</button>'
 
-                                    '</td>';
-                    proveedoresList.appendChild(row);
+        window.onload = function () {
+
+            fetch('/proveedores')
+                .then(function (response) {
+                    return response.json();
+                })
+
+                .then(function (data) {
+                    var proveedoresList = document.getElementById('proveedores-list');
+                    data.forEach(function (proveedor) {
+                        var row = document.createElement('tr');
+                        row.innerHTML = '<td>' + proveedor.nombre_proveedor + '</td>' +
+                            '<td>' + proveedor.correoElectronico + '</td>' +
+                            '<td>' +
+                            '<button class="btn btn-info" onclick="verDetalleProveedor(' + proveedor.IdProveedor + ')" data-toggle="modal" data-target="#detalleProveedorModal">Ver detalle</button>' +    
+                            '<button class="btn btn-success" onclick="modificarProveedor(' + proveedor.IdProveedor + ')">Modificar</button>' +
+                            '<button class="btn btn-danger" onclick="confirmarEliminarProveedor(' + proveedor.IdProveedor + ')">Eliminar</button>'
+
+                        '</td>';
+                        proveedoresList.appendChild(row);
+                    });
+                })
+                .catch(function (error) {
+                    console.error('Error al cargar los proveedores:', error);
                 });
-            })
-            .catch(function(error) {
-                console.error('Error al cargar los proveedores:', error);
-            });
         };
-        function confirmarEliminarProveedor(id) {
-        if (confirm('¿Estás seguro de eliminar este proveedor?')) {
-            eliminarProveedor(id);
+
+
+
+        function verDetalleProveedor(id) {
+            fetch('/proveedores/' + id)
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Error en la red al obtener el proveedor');
+                    }
+                    return response.json();
+                })
+                .then(function (proveedor) {
+                    if (!proveedor) {
+                        throw new Error('Proveedor no encontrado');
+                    }
+                    document.getElementById('detalleNombreProveedor').innerText = proveedor.nombre_proveedor;
+                    document.getElementById('detalleCorreoElectronico').innerText = proveedor.correoElectronico;
+                    $('#detalleProveedorModal').modal('show'); // Mostrar el modal
+                })
+                .catch(function (error) {
+                    console.error('Error al obtener los detalles del proveedor:', error);
+                });
         }
-    }
-        function eliminarProveedor(id) {
-        fetch(`/eliminar_proveedor/${id}`, {
-            method: 'DELETE'
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Proveedor eliminado correctamente.');
-                window.location.reload();
-            } else {
-                console.error('Error al eliminar proveedor.');
+
+        function confirmarEliminarProveedor(id) {
+            if (confirm('¿Estás seguro de eliminar este proveedor?')) {
+                eliminarProveedor(id);
             }
-        })
-        .catch(error => {
-            console.error('Error en la solicitud:', error);
-        });
-    }
+        }
+        function eliminarProveedor(id) {
+            fetch(`/eliminar_proveedor/${id}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Proveedor eliminado correctamente.');
+                        window.location.reload();
+                    } else {
+                        console.error('Error al eliminar proveedor.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                });
+        }
         function modificarProveedor(id) {
             window.location.href = '/modificarProveedor.html?id=' + id;
         }
     </script>
-
-<footer id="contacto">
-    <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
-    <div class="registrarse-link">
-        <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
-        <h6>Recuerde, nos pagan por ayudarle ;|</h6>
-        
-    </div>
-</footer>
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle</h6>
+        </div>
+    </footer>
 </body>
+
 </html>
