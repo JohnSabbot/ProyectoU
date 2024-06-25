@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Carrito de Compras</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="img/logoTech.png" class="foto">
+            </a>
+            <div class="title-container">
+                <div class="logo">Tienda de Insumos Computacionales Chile</div>
+                <a href="carrito.html" class="cart-btn">Carrito (<span id="cart-count">0</span>)</a>
+                <a href="login.html" class="login-btn">Hola!, Inicia Sesion</a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="producto.html">Productos</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container mt-5">
+        <h2>Carrito de Compras</h2>
+        <div id="cart-items" class="mt-3"></div>
+    </div>
+
+    <script>
+        let cart = {};
+
+        function cargarCarrito() {
+            cart = JSON.parse(localStorage.getItem('cart')) || {};
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+
+            for (const id in cart) {
+                let item = document.createElement('div');
+                item.classList.add('cart-item');
+                item.innerHTML = `Producto ID: ${id}, Cantidad: ${cart[id]}`;
+                cartItems.appendChild(item);
+            }
+        }
+
+        window.onload = function() {
+            cargarCarrito();
+            let cartCount = Object.values(cart).reduce((total, count) => total + count, 0);
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+    </script>
+
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
+        </div>
+    </footer>
+</body>
+
+</html>

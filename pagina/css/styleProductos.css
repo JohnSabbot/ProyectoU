@@ -133,6 +133,13 @@ footer .registrarse-link a {
     margin-left: 400px;
 }
 
+.cart-btn {
+    font-weight: bold;
+    color: #ffffff;
+    position: relative;
+    left: 400px;
+}
+
 .container-Cat {
     margin-left: 30px;
 }
