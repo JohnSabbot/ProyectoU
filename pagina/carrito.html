@@ -35,19 +35,54 @@
     </div>
 
     <script>
-        let cart = {};
+        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+        let stock = JSON.parse(localStorage.getItem('stock')) || {};
 
         function cargarCarrito() {
-            cart = JSON.parse(localStorage.getItem('cart')) || {};
             const cartItems = document.getElementById('cart-items');
             cartItems.innerHTML = '';
 
-            for (const id in cart) {
-                let item = document.createElement('div');
-                item.classList.add('cart-item');
-                item.innerHTML = `Producto ID: ${id}, Cantidad: ${cart[id]}`;
-                cartItems.appendChild(item);
+            fetch('/catalogo')
+                .then(response => response.json())
+                .then(data => {
+                    for (const id in cart) {
+                        const producto = data.find(prod => prod.IdProducto == id);
+                        if (producto) {
+                            let item = document.createElement('div');
+                            item.classList.add('cart-item', 'card', 'mb-3');
+                            item.style.width = '18rem';
+                            item.innerHTML = `
+                                <img src="/imagenes/${producto.imagen}" class="card-img-top" alt="${producto.nombreProducto}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${producto.nombreProducto}</h5>
+                                    <p><strong>Cantidad:</strong> ${cart[id]}</p>
+                                    <p><strong>Precio Unitario:</strong> $${producto.precioUnitario}</p>
+                                    <p><strong>Subtotal:</strong> $${producto.precioUnitario * cart[id]}</p>
+                                    <button class="btn btn-danger" onclick="quitarDelCarrito(${id})">Quitar del Carrito</button>
+                                </div>`;
+                            cartItems.appendChild(item);
+                        }
+                    }
+                });
+        }
+
+        function quitarDelCarrito(id) {
+            if (cart[id]) {
+                cart[id]--;
+                stock[id]++;
+                if (cart[id] === 0) {
+                    delete cart[id];
+                }
+                actualizarCarrito();
+                cargarCarrito();
             }
+        }
+
+        function actualizarCarrito() {
+            let cartCount = Object.values(cart).reduce((total, count) => total + count, 0);
+            document.getElementById('cart-count').innerText = cartCount;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('stock', JSON.stringify(stock));
         }
 
         window.onload = function() {

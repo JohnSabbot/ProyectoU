@@ -74,7 +74,7 @@
                             `<img src="/imagenes/${prod.imagen}" class="card-img-top" alt="">
                             <div class="card-body">
                                 <h5 class="card-title">${prod.nombreProducto}</h5>
-                                <p><strong>Stock:</strong> ${prod.stock}</p>
+                                <p><strong>Stock:</strong> <span id="stock-${prod.IdProducto}">${prod.stock}</span></p>
                                 <p><strong>Precio:</strong> $${prod.precioUnitario}</p>
                                 <button class="btn btn-success" onclick="agregarAlCarrito(${prod.IdProducto})">Agregar al Carrito</button>
                                 <button class="btn btn-danger" onclick="quitarDelCarrito(${prod.IdProducto})">Quitar del Carrito</button>
@@ -85,22 +85,34 @@
         };
 
         function agregarAlCarrito(id) {
-            if (cart[id]) {
-                cart[id]++;
+            const stockElement = document.getElementById(`stock-${id}`);
+            let stock = parseInt(stockElement.innerText);
+            if (stock > 0) {
+                if (cart[id]) {
+                    cart[id]++;
+                } else {
+                    cart[id] = 1;
+                }
+                stock--;
+                stockElement.innerText = stock;
+                actualizarCarrito();
             } else {
-                cart[id] = 1;
+                alert('No hay suficiente stock disponible.');
             }
-            actualizarCarrito();
         }
 
         function quitarDelCarrito(id) {
             if (cart[id]) {
+                const stockElement = document.getElementById(`stock-${id}`);
+                let stock = parseInt(stockElement.innerText);
                 cart[id]--;
+                stock++;
+                stockElement.innerText = stock;
                 if (cart[id] === 0) {
                     delete cart[id];
                 }
+                actualizarCarrito();
             }
-            actualizarCarrito();
         }
 
         function actualizarCarrito() {
