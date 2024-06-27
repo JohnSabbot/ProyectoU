@@ -139,6 +139,17 @@ footer .registrarse-link a {
     position: relative;
     left: 400px;
 }
+.btn2 {
+    background-color: white;
+    color: black;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.btn2:hover {
+    background-color: red;
+    
+}
 
 .container-Cat {
     margin-left: 30px;
