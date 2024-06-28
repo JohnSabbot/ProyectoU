@@ -70,14 +70,6 @@ nav ul li a {
     color: #333;
 }
 
-.btn {
-    background-color: #ff6b6b;
-    color: white;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
 
 footer {
     width: 100%;
@@ -146,10 +138,7 @@ footer .registrarse-link a {
     text-decoration: none;
     border-radius: 5px;
 }
-.btn2:hover {
-    background-color: red;
-    
-}
+
 
 .container-Cat {
     margin-left: 30px;
@@ -241,14 +230,4 @@ input[type="submit"]:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.card .btn-success {
-    background-color: #28a745;
-    color: white;
-}
-
-.card .btn-danger {
-    background-color: #dc3545;
-    color: white;
 }
