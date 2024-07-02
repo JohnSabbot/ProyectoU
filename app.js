@@ -2,12 +2,13 @@ const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const port = 3000;
 
 
-const upload = multer({dest: 'imagenes/'});
+const upload = multer({ dest: 'imagenes/' });
 
 
 const connection = mysql.createConnection({
@@ -27,7 +28,7 @@ connection.connect((err) => {
 
 
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/imagenes', express.static(path.join(__dirname, 'imagenes')));
 
@@ -38,16 +39,16 @@ app.use('/imagenes', express.static(path.join(__dirname, 'imagenes')));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'pagina'))); 
+app.use(express.static(path.join(__dirname, 'pagina')));
 
 
-app.post('/registrar_usuario', (req, res) =>{
-    const {nombre_usuario, apellido_usuario, direccion, correoElectronico, contraseña, rol} = req.body;
+app.post('/registrar_usuario', (req, res) => {
+    const { nombre_usuario, apellido_usuario, direccion, correoElectronico, contraseña, rol } = req.body;
     const sql = 'INSERT INTO usuarios (nombre_usuario, apellido_usuario, direccion, correoElectronico, contraseña, rol) VALUES (?, ?, ?, ?, ?, ?)';
-    connection.query(sql,[nombre_usuario, apellido_usuario, direccion, correoElectronico, contraseña, rol], (err, result) =>{
-        if(err){
+    connection.query(sql, [nombre_usuario, apellido_usuario, direccion, correoElectronico, contraseña, rol], (err, result) => {
+        if (err) {
             console.error('Error al registrar usuario', err);
-        }else{
+        } else {
             console.log('El usuario se registro correctamente');
             res.redirect('/login.html');
         }
@@ -55,21 +56,21 @@ app.post('/registrar_usuario', (req, res) =>{
 });
 
 
-app.post('/iniciar_sesion', (req, res) =>{
-    const {correoElectronico, contraseña} = req.body;
+app.post('/iniciar_sesion', (req, res) => {
+    const { correoElectronico, contraseña } = req.body;
     const sql = 'SELECT rol FROM usuarios WHERE correoElectronico = ? AND contraseña = ?';
-    connection.query(sql,[correoElectronico, contraseña], (err, result) =>{
-        if(err){
+    connection.query(sql, [correoElectronico, contraseña], (err, result) => {
+        if (err) {
             console.error('Error al iniciar sesion', err);
-        }else if(result.length > 0){
+        } else if (result.length > 0) {
             const rol = result[0].rol;
-            if(rol === 1){
+            if (rol === 1) {
                 res.redirect('/Admin.html');
-            }else if(rol === 2){
+            } else if (rol === 2) {
                 res.redirect('/producto.html');
             }
         }
-        else{
+        else {
             res.send('Correo o contraseña incorrectos');
         }
     });
@@ -110,7 +111,7 @@ app.post('/guardar_producto', upload.single('imagen'), (req, res) => {
 
     const imagen = req.file.filename;
     const sql = 'INSERT INTO productos (nombreProducto, precioUnitario, stock, imagen, IdProveedor, IdCategoria) VALUES (?, ?, ?, ?, ?, ?)';
-    
+
     connection.query(sql, [nombre, precio, stock, imagen, proveedor, categoria], (error) => {
         if (error) {
             console.error('Error al insertar producto: ' + error.message);
@@ -275,6 +276,36 @@ app.post('/modificar_proveedor', (req, res) => {
         res.redirect('/gestionProveedor.html');
     });
 });
+
+
+app.post('/send-email', (req, res) => {
+    const { email, invoice } = req.body;
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'proyectotest520@gmail.com',
+            pass: 'ykow duww wckw kzss'
+        }
+    });
+
+    const mailOptions = {
+        from: 'proyectotest520@gmail.com',
+        to: email,
+        subject: 'Detalles de su Compra',
+        html: invoice
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log('Error al enviar el correo:', error);
+            return res.status(500).json({ error: error.toString() });
+        }
+        console.log('Correo enviado:', info.response);
+        res.status(200).json({ message: 'Correo enviado' });
+    });
+});
+
 app.listen(port, () => {
     console.log('Servidor corriendo en http://localhost:3000');
 });

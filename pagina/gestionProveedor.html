@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -31,11 +32,13 @@
     <div class="Gestiones">
         <button onclick="window.location.href='Admin.html'">Volver</button>
     </div>
-    <div class="titlePage">
+    <div class="titlePage mx-5 my-3">
         <h2>Gestion Proveedores</h2>
     </div>
-
-    <button class="btn btn-success" onclick="window.location.href = '/agregarProveedor.html'">Agregar Proveedor</button>
+    <div class="col-md-3 mx-4">
+        <button class="btn btn-outline-success" onclick="window.location.href = '/agregarProveedor.html'">Agregar
+            Proveedor</button>
+    </div>
 
     <div class="card-container" id="productos-list"></div>
 
@@ -50,7 +53,8 @@
         </thead>
         <tbody id="proveedores-list"></tbody>
     </table>
-    <div class="modal fade" id="detalleProveedorModal" tabindex="-1" role="dialog" aria-labelledby="detalleProveedorModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detalleProveedorModal" tabindex="-1" role="dialog"
+        aria-labelledby="detalleProveedorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,7 +93,7 @@
                         row.innerHTML = '<td>' + proveedor.nombre_proveedor + '</td>' +
                             '<td>' + proveedor.correoElectronico + '</td>' +
                             '<td>' +
-                            '<button class="btn btn-info" onclick="verDetalleProveedor(' + proveedor.IdProveedor + ')" data-toggle="modal" data-target="#detalleProveedorModal">Ver detalle</button>' +    
+                            '<button class="btn btn-info" onclick="verDetalleProveedor(' + proveedor.IdProveedor + ')" data-toggle="modal" data-target="#detalleProveedorModal">Ver detalle</button>' +
                             '<button class="btn btn-success" onclick="modificarProveedor(' + proveedor.IdProveedor + ')">Modificar</button>' +
                             '<button class="btn btn-danger" onclick="confirmarEliminarProveedor(' + proveedor.IdProveedor + ')">Eliminar</button>'
 
