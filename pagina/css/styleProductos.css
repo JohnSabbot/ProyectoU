@@ -1,0 +1,233 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+header {
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.titlePage {
+    margin-left: 300px;
+    padding-top: 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    color: white;
+    text-align: center;
+    padding: 4em 0;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin: 0;
+    color: #333;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin: 1em 0;
+    color: #333;
+}
+
+
+footer {
+    width: 100%;
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer .registrarse-link h5, footer .registrarse-link h6 {
+    margin: 5px 0;
+}
+
+footer .registrarse-link a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.foto {
+    height: 120px;
+    width: 120px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 30%;
+    margin-left: 10px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 400px;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+}
+
+.login-btn {
+    font-weight: bold;
+    color: #ffffff;
+    margin-left: 400px;
+}
+
+.cart-btn {
+    font-weight: bold;
+    color: #ffffff;
+    position: relative;
+    left: 400px;
+}
+.btn2 {
+    background-color: white;
+    color: black;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+.container-Cat {
+    margin-left: 30px;
+}
+
+.product-count {
+    font-size: 14px;
+    color: gray;
+    margin: 0;
+}
+
+h2 {
+    color: rgb(0, 0, 0);
+}
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+form div {
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    font-weight: bold;
+}
+input[type="text"],
+input[type="date"],
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 10px 0;
+}
+
+.card button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

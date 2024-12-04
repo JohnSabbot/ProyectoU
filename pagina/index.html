@@ -3,29 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenidos a Nuestra Tienda de Insumos Computacionales</title>
+    <title>Bienvenido!</title>
     <link rel="stylesheet" href="css/Estilo.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body>
     <header>
-        <div class="logo">Tienda de Insumos Computacionales</div>
+        <div class="logo-container">
+            <img src="img/logoTech.png" class="foto">
+            <div class="title-container">
+                <div class="logo">Tienda de Insumos Computacionales Chile</div>
+                <a href="login.html" class="login-btn">Hola!, Inicia Sesion</a>
+            </div>
+            
+        </div>
         <nav>
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
+              
             </ul>
         </nav>
     </header>
 
     <section id="inicio" class="hero">
-        <h1>Bienvenidos a Nuestra Tienda</h1>
+        <h1>Bienvenidos a Nuestra Tienda Tech-Hogar</h1>
         <p>Encuentra los mejores insumos computacionales al mejor precio.</p>
-        <a href="#productos" class="btn">Ver Productos</a>
+        <br>
+        <a href="producto.html" class="btn btn-outline-success">Ver Productos</a>
     </section>
 
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="img/laptop.jpg" alt="Imagen 1">
+            </div>
+            <div class="carousel-item">
+                <img src="img/mousepad.png" alt="Imagen 2">
+            </div>
+            <div class="carousel-item">
+                <img src="img/keyboard.png" alt="Imagen 3">
+            </div>
+        </div>
+        <a class="carousel-control prev" onclick="prevSlide()">&#10094;</a>
+        <a class="carousel-control next" onclick="nextSlide()">&#10095;</a>
+    </div>
+    <script src="js/carrusel.js"></script>
+
     <footer id="contacto">
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
+        </div>
         <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
     </footer>
 </body>

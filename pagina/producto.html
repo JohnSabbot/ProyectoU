@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Bienvenidos a Nuestra Tienda de Insumos Computacionales</title>
+    <link rel="stylesheet" href="css/styleProductos.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="img/logoTech.png" class="foto">
+            </a>
+            <div class="title-container">
+                <div class="logo">Tienda de Insumos Computacionales Chile</div>
+                <a href="carrito.html" class="cart-btn btn2 btn-outline-primary ml-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1a1 1 0 0 1 1-1h1.293a1 1 0 0 1 .707.293l.646.647H14a1 1 0 0 1 .979 1.23l-1.5 8A1 1 0 0 1 12.5 11H4a1 1 0 0 1-.979-.772L1.621 3H1v1H0V1zm2.5 2.5L3.82 9h8.678l1.25-6.5H4.293l-.646-.647L2.5 2.5zm2.5 10.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    (<span id="cart-count">0</span>)
+                </a>
+                <a href="login.html" class="login-btn">Hola!, Inicia Sesion</a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="producto.html">Productos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="titlePage">
+        <p id="product-count" class="product-count"></p>
+        <h2>Productos</h2>
+    </div>
+
+    <div id="promos-list" class="product-list"></div>
+
+    <div class="card-container" id="productos-list"></div>
+
+    <script>
+        let cart = {};
+
+        window.onload = function () {
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'));
+                actualizarCarrito();
+            }
+            fetch('/catalogo')
+                .then(response => response.json())
+                .then(data => {
+                    var productsList = document.getElementById('productos-list');
+                    data.forEach(prod => {
+                        var card = document.createElement('div');
+                        card.classList.add('card');
+                        card.style.width = '18rem';
+                        card.innerHTML =
+                            `<img src="/imagenes/${prod.imagen}" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title">${prod.nombreProducto}</h5>
+                                <p><strong>Stock:</strong> <span id="stock-${prod.IdProducto}">${prod.stock}</span></p>
+                                <p><strong>Precio:</strong> $${prod.precioUnitario}</p>
+                                <button class="btn btn-success" onclick="agregarAlCarrito(${prod.IdProducto})">Agregar al Carrito</button>
+                                <button class="btn btn-danger" onclick="quitarDelCarrito(${prod.IdProducto})">Quitar del Carrito</button>
+                            </div>`;
+                        productsList.appendChild(card);
+                    });
+                });
+        };
+
+        function agregarAlCarrito(id) {
+            const stockElement = document.getElementById(`stock-${id}`);
+            let stock = parseInt(stockElement.innerText);
+            if (stock > 0) {
+                if (cart[id]) {
+                    cart[id]++;
+                } else {
+                    cart[id] = 1;
+                }
+                stock--;
+                stockElement.innerText = stock;
+                actualizarCarrito();
+            } else {
+                alert('No hay suficiente stock disponible.');
+            }
+        }
+
+        function quitarDelCarrito(id) {
+            if (cart[id]) {
+                const stockElement = document.getElementById(`stock-${id}`);
+                let stock = parseInt(stockElement.innerText);
+                cart[id]--;
+                stock++;
+                stockElement.innerText = stock;
+                if (cart[id] === 0) {
+                    delete cart[id];
+                }
+                actualizarCarrito();
+            }
+        }
+
+        function actualizarCarrito() {
+            let cartCount = Object.values(cart).reduce((total, count) => total + count, 0);
+            document.getElementById('cart-count').innerText = cartCount;
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function eliminarProducto(id) {
+            fetch('/eliminar_producto/' + id, {
+                method: 'DELETE'
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Producto eliminado correctamente.');
+                        window.location.reload();
+                    } else {
+                        console.error('Error al eliminar producto.');
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error en la solicitud:', error);
+                });
+        }
+
+    </script>
+
+    <footer id="contacto">
+        <p>&copy; 2024 Tienda de Insumos Computacionales. Todos los derechos reservados.</p>
+        <div class="registrarse-link">
+            <h5>Consulte aca: <a href="contacto.html">Contacto</a></h5>
+            <h6>Recuerde, nos pagan por ayudarle ;|</h6>
+        </div>
+    </footer>
+</body>
+
+</html>
